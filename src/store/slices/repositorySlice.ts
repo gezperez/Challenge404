@@ -9,20 +9,43 @@ interface RepositoryState {
   repositoriesLoading: boolean;
   repositoriesError: boolean;
   repositories: Repository[];
-  selectedRepositories: Repository[];
+  showSelectionMode: boolean;
 }
 
 const initialState: RepositoryState = {
   repositories: [],
-  selectedRepositories: [],
   repositoriesError: false,
   repositoriesLoading: false,
+  showSelectionMode: false,
 };
 
 const repositorySlice = createAppSlice({
   name: 'repository',
   initialState,
   reducers: (create) => ({
+    setShowSelectionMode: create.reducer((state) => {
+      state.showSelectionMode = !state.showSelectionMode;
+    }),
+    setRepositorySelected: create.reducer(
+      (state, action: PayloadAction<number>) => {
+        const repoIndex = state.repositories.findIndex(
+          (repository) => repository.id === action.payload,
+        );
+        if (repoIndex !== -1) {
+          state.repositories[repoIndex].checked =
+            !state.repositories[repoIndex].checked;
+        }
+      },
+    ),
+    removeRepositorySelection: create.reducer((state) => {
+      state.repositories.forEach((repo) => {
+        repo.checked = false;
+      });
+    }),
+
+    deleteSelectedRepositories: create.reducer((state) => {
+      state.repositories = state.repositories.filter((repo) => !repo.checked);
+    }),
     fetchRepositories: create.asyncThunk(
       async (
         { searchString, count }: { searchString: string; count: number },
@@ -61,6 +84,12 @@ const repositorySlice = createAppSlice({
   }),
 });
 
-export const { fetchRepositories } = repositorySlice.actions;
+export const {
+  fetchRepositories,
+  setShowSelectionMode,
+  setRepositorySelected,
+  removeRepositorySelection,
+  deleteSelectedRepositories,
+} = repositorySlice.actions;
 
 export default repositorySlice.reducer;

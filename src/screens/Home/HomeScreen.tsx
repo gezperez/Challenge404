@@ -1,30 +1,75 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { RepositoryList } from '@/components';
-import { DSContainer } from '@/ds';
-import { useRepository } from '@/hooks';
+import { RepositoryList, RepositoryListHeader } from '@/components';
+import { DSContainer, DSLoader } from '@/ds';
+import { useDebounce, useRepository } from '@/hooks';
+import { Repository } from '@/types';
 
 const HomeScreen = () => {
-  const { getRepositories, repositories } = useRepository();
+  const {
+    getRepositories,
+    repositories,
+    isRepositoriesLoading,
+    hasSelectedRepositories,
+    switchRepositorySelected,
+    removeSelectedRepositories,
+  } = useRepository();
 
   const handleRepositoryPress = () => {};
 
-  useEffect(() => {
-    getRepositories('Challenge404', 20);
-  }, []);
+  const handleRepositoryCheckPress = (repository: Repository) => {
+    switchRepositorySelected(repository.id);
+  };
+
+  const handleDeletePress = () => {
+    removeSelectedRepositories();
+  };
+
+  const handleSearchChange = (searchString: string) => {
+    getRepositories(searchString, 20);
+  };
+
+  const debounceGetRepositories = useDebounce({
+    callback: handleSearchChange,
+    delay: 500,
+  });
+
+  const renderContent = () => {
+    if (isRepositoriesLoading) {
+      return <DSLoader />;
+    }
+
+    return (
+      <>
+        <RepositoryList
+          data={repositories}
+          onPress={handleRepositoryPress}
+          onCheckPress={handleRepositoryCheckPress}
+        />
+      </>
+    );
+  };
+
+  const getBottomBarProps = () => {
+    if (hasSelectedRepositories) {
+      return {
+        buttonProps: {
+          title: 'See selected',
+          onPress: () => {},
+        },
+      };
+    }
+
+    return undefined;
+  };
 
   return (
-    <DSContainer
-      bottomBarProps={{
-        inputProps: {
-          placeholder: 'Search...',
-        },
-      }}
-    >
-      <RepositoryList
-        data={repositories}
-        onPress={handleRepositoryPress}
+    <DSContainer bottomBarProps={getBottomBarProps()}>
+      <RepositoryListHeader
+        onChangeText={debounceGetRepositories}
+        onDeletePress={handleDeletePress}
       />
+      {renderContent()}
     </DSContainer>
   );
 };

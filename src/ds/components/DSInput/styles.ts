@@ -3,22 +3,28 @@ import { StyleSheet } from 'react-native';
 import { BorderRadius, Color, Spacing } from '@/ds/constants';
 
 const styles = StyleSheet.create({
-  container: {
+  headerContainer: {
+    flexDirection: 'row',
+    marginBottom: Spacing.XS,
+  },
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-    borderWidth: 1.5,
-    borderColor: Color.SECONDARY,
+    borderWidth: 2,
     borderRadius: BorderRadius.INFINITE,
-    height: 54,
+    borderColor: Color.SECONDARY,
+  },
+  errorStyle: {
+    borderColor: Color.DANGER,
   },
   input: {
     flex: 1,
-    paddingHorizontal: 16,
-    color: Color.SECONDARY,
+    minHeight: 60,
+    padding: 16,
   },
-  icon: {
-    marginRight: Spacing.MD,
+  descriptionText: {
+    marginTop: Spacing.XS,
+    marginLeft: Spacing.MD,
   },
 });
 

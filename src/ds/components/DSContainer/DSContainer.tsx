@@ -1,18 +1,13 @@
 import React, { ReactNode } from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  View,
-} from 'react-native';
+import { SafeAreaView, StatusBar, View } from 'react-native';
 
 import styles from './styles';
-import DSInput from '../DSInput';
-import { DSInputProps } from '../DSInput/DSInput';
+import DSButton from '../DSButton';
+
+import { ButtonProps } from '@/ds/types';
 
 type BottomBarProps = {
-  inputProps: DSInputProps;
+  buttonProps: ButtonProps;
 };
 
 type DSContainerProps = {
@@ -23,11 +18,11 @@ type DSContainerProps = {
 const DSContainer = ({ children, bottomBarProps }: DSContainerProps) => {
   const renderBottomBar = () => {
     if (bottomBarProps) {
-      const { inputProps } = bottomBarProps;
+      const { buttonProps } = bottomBarProps;
       return (
         <SafeAreaView>
-          <View style={styles.bottomBarInnerContainer}>
-            {inputProps && <DSInput {...inputProps} />}
+          <View style={styles.inputContainer}>
+            {buttonProps && <DSButton {...buttonProps} />}
           </View>
         </SafeAreaView>
       );
@@ -37,15 +32,11 @@ const DSContainer = ({ children, bottomBarProps }: DSContainerProps) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={116}
-    >
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <View style={styles.innerContainer}>{children}</View>
       {renderBottomBar()}
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

@@ -11,12 +11,16 @@ const styles = StyleSheet.create({
     marginVertical: Spacing.XS,
     paddingHorizontal: Spacing.SM,
     paddingVertical: Spacing.XS,
-    backgroundColor: Color.PRIMARY,
-    borderRadius: BorderRadius.LG,
+    borderRadius: BorderRadius.MD,
+    borderWidth: 2,
+    borderColor: Color.SECONDARY,
   },
   textContainer: {
     flex: 1,
     marginHorizontal: Spacing.SM,
+  },
+  checkBox: {
+    marginRight: Spacing.SM,
   },
 });
 

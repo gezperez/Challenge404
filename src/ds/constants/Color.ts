@@ -1,6 +1,6 @@
 enum Color {
   LIGHT_GRAY = '#F7F5FA',
-  GRAY = '#E3E3E3',
+  GRAY = '#aba9a9',
   DARK_GRAY = '#4B5055',
   PRIMARY = '#836FFF',
   SECONDARY = '#453182',

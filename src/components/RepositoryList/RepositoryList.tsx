@@ -8,15 +8,21 @@ import { Repository } from '@/types';
 type RepositoryListProps = {
   data: Repository[];
   onPress: (repository: Repository) => void;
+  onCheckPress: (repository: Repository) => void;
 };
 
-const RepositoryList = ({ data, onPress }: RepositoryListProps) => {
+const RepositoryList = ({
+  data,
+  onPress,
+  onCheckPress,
+}: RepositoryListProps) => {
   const getKey = (item: Repository) => item.id.toString();
 
   const renderItem = ({ item }: { item: Repository; index: number }) => (
     <RepositoryCard
       repository={item}
       onPress={onPress}
+      onCheckPress={onCheckPress}
     />
   );
 

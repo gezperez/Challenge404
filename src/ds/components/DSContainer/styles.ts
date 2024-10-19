@@ -13,14 +13,15 @@ const styles = StyleSheet.create({
   bottomBarContainer: {
     backgroundColor: Color.WHITE,
   },
-  bottomBarInnerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: Spacing.SM,
-    paddingBottom: Platform.OS === 'android' ? Spacing.MD : 0,
-  },
   button: {
     marginLeft: Spacing.SM,
+  },
+  inputContainer: {
+    borderTopWidth: 1,
+    borderColor: Color.PRIMARY,
+    paddingHorizontal: Spacing.MD,
+    paddingTop: Spacing.XS,
+    paddingBottom: Platform.OS === 'android' ? Spacing.XS : 0,
   },
 });
 
