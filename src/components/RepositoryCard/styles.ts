@@ -22,6 +22,13 @@ const styles = StyleSheet.create({
   checkBox: {
     marginRight: Spacing.SM,
   },
+  rightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  starText: {
+    marginRight: Spacing.XS,
+  },
 });
 
 export default styles;

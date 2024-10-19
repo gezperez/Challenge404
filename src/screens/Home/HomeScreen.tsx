@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { ListHeader, RepositoryList } from '@/components';
+import { ListHeader, RepositoryList, StarCount } from '@/components';
 import { DSContainer, DSLoader } from '@/ds';
+import { BottomBarProps } from '@/ds/types';
 import { useAppNavigation, useDebounce, useRepository } from '@/hooks';
 import { Repository } from '@/types';
 
@@ -13,10 +14,12 @@ const HomeScreen = () => {
     hasSelectedRepositories,
     switchRepositorySelected,
     removeSelectedRepositories,
+    removeRepositories,
     showSelectionMode,
     hasRepositories,
     switchSelectionMode,
     openRepository,
+    totalStarsCount,
   } = useRepository();
 
   const { navigate } = useAppNavigation();
@@ -33,6 +36,7 @@ const HomeScreen = () => {
   };
 
   const handleSearchChange = (searchString: string) => {
+    removeRepositories();
     getRepositories(searchString, 20);
   };
 
@@ -62,16 +66,26 @@ const HomeScreen = () => {
   };
 
   const getBottomBarProps = () => {
+    let props: BottomBarProps | undefined;
+
     if (hasSelectedRepositories) {
-      return {
+      props = {
+        ...props,
         buttonProps: {
           title: 'See selected',
           onPress: handleSeeSelectionPress,
         },
-      };
+      } as BottomBarProps;
     }
 
-    return undefined;
+    if (totalStarsCount > 0) {
+      props = {
+        ...props,
+        renderContent: () => <StarCount amount={totalStarsCount} />,
+      } as BottomBarProps;
+    }
+
+    return props;
   };
 
   return (

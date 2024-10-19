@@ -9,12 +9,14 @@ type RepositoryListProps = {
   data: Repository[];
   onPress: (repository: Repository) => void;
   onCheckPress?: (repository: Repository) => void;
+  showChecks?: boolean;
 };
 
 const RepositoryList = ({
   data,
   onPress,
   onCheckPress,
+  showChecks,
 }: RepositoryListProps) => {
   const getKey = (item: Repository) => item.id.toString();
 
@@ -23,6 +25,7 @@ const RepositoryList = ({
       repository={item}
       onPress={onPress}
       onCheckPress={onCheckPress}
+      showCheck={showChecks}
     />
   );
 

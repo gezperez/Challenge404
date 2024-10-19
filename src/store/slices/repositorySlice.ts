@@ -42,7 +42,9 @@ const repositorySlice = createAppSlice({
         repo.checked = false;
       });
     }),
-
+    deleteRepositories: create.reducer((state) => {
+      state.repositories = [];
+    }),
     deleteSelectedRepositories: create.reducer((state) => {
       state.repositories = state.repositories.filter((repo) => !repo.checked);
     }),
@@ -90,6 +92,7 @@ export const {
   setRepositorySelected,
   removeRepositorySelection,
   deleteSelectedRepositories,
+  deleteRepositories,
 } = repositorySlice.actions;
 
 export default repositorySlice.reducer;

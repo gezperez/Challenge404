@@ -8,6 +8,7 @@ enum Color {
   WHITE = '#FFFFFF',
   BACKGROUND = '#a394ff',
   DANGER = '#B2261A',
+  TERTIARY = '#ffb62e',
 }
 
 export default Color;

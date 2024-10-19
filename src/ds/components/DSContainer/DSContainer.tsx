@@ -4,11 +4,7 @@ import { SafeAreaView, StatusBar, View } from 'react-native';
 import styles from './styles';
 import DSButton from '../DSButton';
 
-import { ButtonProps } from '@/ds/types';
-
-type BottomBarProps = {
-  buttonProps: ButtonProps;
-};
+import { BottomBarProps } from '@/ds/types';
 
 type DSContainerProps = {
   children: ReactNode;
@@ -18,10 +14,13 @@ type DSContainerProps = {
 const DSContainer = ({ children, bottomBarProps }: DSContainerProps) => {
   const renderBottomBar = () => {
     if (bottomBarProps) {
-      const { buttonProps } = bottomBarProps;
+      const { buttonProps, renderContent } = bottomBarProps;
       return (
         <SafeAreaView>
-          <View style={styles.inputContainer}>
+          <View style={styles.bottomBarContainer}>
+            <View style={styles.renderContainer}>
+              {renderContent && renderContent()}
+            </View>
             {buttonProps && <DSButton {...buttonProps} />}
           </View>
         </SafeAreaView>

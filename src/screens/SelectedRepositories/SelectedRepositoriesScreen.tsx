@@ -16,6 +16,7 @@ const SelectedRepositoriesScreen = () => {
       <RepositoryList
         data={selectedRepositories}
         onPress={handleRepositoryPress}
+        showChecks={false}
       />
     </DSContainer>
   );

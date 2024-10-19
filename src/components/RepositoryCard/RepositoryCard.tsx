@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import { ChevronRight } from 'lucide-react-native';
+import { Star } from 'lucide-react-native';
 
 import styles from './styles';
 
@@ -13,15 +13,17 @@ type RepositoryCardProps = {
   repository: Repository;
   onPress: (repository: Repository) => void;
   onCheckPress?: (repository: Repository) => void;
+  showCheck?: boolean;
 };
 
 const RepositoryCard = ({
   repository,
   onPress,
   onCheckPress,
+  showCheck = true,
 }: RepositoryCardProps) => {
   const { showSelectionMode } = useRepository();
-  const { owner, name, checked } = repository;
+  const { owner, name, checked, stargazers_count } = repository;
 
   const { avatar_url, login } = owner;
 
@@ -34,7 +36,7 @@ const RepositoryCard = ({
       onPress={handleItemPress}
       style={styles.container}
     >
-      {showSelectionMode && (
+      {showSelectionMode && showCheck && (
         <DSCheckBox
           onChange={handleCheckPress}
           style={styles.checkBox}
@@ -58,7 +60,20 @@ const RepositoryCard = ({
           {name}
         </DSText>
       </View>
-      <ChevronRight color={Color.SECONDARY} />
+      <View style={styles.rightContainer}>
+        <DSText
+          color={Color.SECONDARY}
+          type={Typography.BODY_SMALL_BOLD}
+          style={styles.starText}
+        >
+          {stargazers_count}
+        </DSText>
+        <Star
+          color={Color.TERTIARY}
+          size={16}
+          strokeWidth={3}
+        />
+      </View>
     </TouchableOpacity>
   );
 };

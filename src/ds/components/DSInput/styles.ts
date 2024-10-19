@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 60,
     padding: 16,
+    color: Color.SECONDARY,
   },
   descriptionText: {
     marginTop: Spacing.XS,

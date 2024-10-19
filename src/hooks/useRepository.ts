@@ -2,8 +2,13 @@ import { Linking } from 'react-native';
 
 import { useAppDispatch, useAppSelector } from './store';
 
-import { getSelectedRepositoriesSelector } from '@/store/selectors';
 import {
+  getRepositoriesSortedByStarsSelector,
+  getSelectedRepositoriesSelector,
+  getTotalStarCountSelector,
+} from '@/store/selectors';
+import {
+  deleteRepositories,
   deleteSelectedRepositories,
   fetchRepositories,
   removeRepositorySelection,
@@ -15,7 +20,7 @@ import { Repository } from '@/types';
 const useRepository = () => {
   const dispatch = useAppDispatch();
 
-  const repositories = useAppSelector((state) => state.repository.repositories);
+  const repositories = useAppSelector(getRepositoriesSortedByStarsSelector);
 
   const showSelectionMode = useAppSelector(
     (state) => state.repository.showSelectionMode,
@@ -31,6 +36,8 @@ const useRepository = () => {
 
   const hasSelectedRepositories = selectedRepositories.length > 0;
 
+  const totalStarsCount = useAppSelector(getTotalStarCountSelector);
+
   const switchSelectionMode = () => {
     dispatch(setShowSelectionMode());
     dispatch(removeRepositorySelection());
@@ -38,6 +45,10 @@ const useRepository = () => {
 
   const switchRepositorySelected = (id: number) => {
     dispatch(setRepositorySelected(id));
+  };
+
+  const removeRepositories = () => {
+    dispatch(deleteRepositories());
   };
 
   const removeSelectedRepositories = () => {
@@ -68,7 +79,9 @@ const useRepository = () => {
     switchSelectionMode,
     switchRepositorySelected,
     removeSelectedRepositories,
+    removeRepositories,
     openRepository,
+    totalStarsCount,
   };
 };
 
