@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     marginLeft: Spacing.SM,
   },
   inputContainer: {
-    borderTopWidth: 1,
-    borderColor: Color.PRIMARY,
+    borderTopWidth: 0.5,
+    borderColor: Color.SECONDARY,
     paddingHorizontal: Spacing.MD,
     paddingTop: Spacing.XS,
     paddingBottom: Platform.OS === 'android' ? Spacing.XS : 0,

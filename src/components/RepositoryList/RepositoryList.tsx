@@ -8,7 +8,7 @@ import { Repository } from '@/types';
 type RepositoryListProps = {
   data: Repository[];
   onPress: (repository: Repository) => void;
-  onCheckPress: (repository: Repository) => void;
+  onCheckPress?: (repository: Repository) => void;
 };
 
 const RepositoryList = ({

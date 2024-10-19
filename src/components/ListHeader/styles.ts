@@ -4,8 +4,8 @@ import { Color, Spacing } from '@/ds';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    borderBottomWidth: 1,
-    borderColor: Color.PRIMARY,
+    borderBottomWidth: 0.5,
+    borderColor: Color.SECONDARY,
   },
   container: {
     flexDirection: 'row',

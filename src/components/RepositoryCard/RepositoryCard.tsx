@@ -12,7 +12,7 @@ import { Repository } from '@/types';
 type RepositoryCardProps = {
   repository: Repository;
   onPress: (repository: Repository) => void;
-  onCheckPress: (repository: Repository) => void;
+  onCheckPress?: (repository: Repository) => void;
 };
 
 const RepositoryCard = ({
@@ -27,7 +27,7 @@ const RepositoryCard = ({
 
   const handleItemPress = () => onPress(repository);
 
-  const handleCheckPress = () => onCheckPress(repository);
+  const handleCheckPress = () => onCheckPress && onCheckPress(repository);
 
   return (
     <TouchableOpacity

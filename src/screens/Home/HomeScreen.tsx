@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { RepositoryList, RepositoryListHeader } from '@/components';
+import { ListHeader, RepositoryList } from '@/components';
 import { DSContainer, DSLoader } from '@/ds';
-import { useDebounce, useRepository } from '@/hooks';
+import { useAppNavigation, useDebounce, useRepository } from '@/hooks';
 import { Repository } from '@/types';
 
 const HomeScreen = () => {
@@ -13,9 +13,16 @@ const HomeScreen = () => {
     hasSelectedRepositories,
     switchRepositorySelected,
     removeSelectedRepositories,
+    showSelectionMode,
+    hasRepositories,
+    switchSelectionMode,
+    openRepository,
   } = useRepository();
 
-  const handleRepositoryPress = () => {};
+  const { navigate } = useAppNavigation();
+
+  const handleRepositoryPress = (repository: Repository) =>
+    openRepository(repository);
 
   const handleRepositoryCheckPress = (repository: Repository) => {
     switchRepositorySelected(repository.id);
@@ -27,6 +34,10 @@ const HomeScreen = () => {
 
   const handleSearchChange = (searchString: string) => {
     getRepositories(searchString, 20);
+  };
+
+  const handleSeeSelectionPress = () => {
+    navigate('SelectedRepositories');
   };
 
   const debounceGetRepositories = useDebounce({
@@ -55,7 +66,7 @@ const HomeScreen = () => {
       return {
         buttonProps: {
           title: 'See selected',
-          onPress: () => {},
+          onPress: handleSeeSelectionPress,
         },
       };
     }
@@ -65,9 +76,13 @@ const HomeScreen = () => {
 
   return (
     <DSContainer bottomBarProps={getBottomBarProps()}>
-      <RepositoryListHeader
+      <ListHeader
         onChangeText={debounceGetRepositories}
         onDeletePress={handleDeletePress}
+        showButtons={hasRepositories}
+        isSelectionMode={showSelectionMode}
+        onPressSelectionMode={switchSelectionMode}
+        showDeleteButton={hasSelectedRepositories}
       />
       {renderContent()}
     </DSContainer>

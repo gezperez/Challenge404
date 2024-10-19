@@ -10,7 +10,7 @@ import { RootStackParamsList } from './Params';
 import { navigationRef } from './RootNavigation';
 
 import { Color, TypographyVariant } from '@/ds';
-import { HomeScreen } from '@/screens';
+import { HomeScreen, SelectedRepositoriesScreen } from '@/screens';
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
@@ -19,6 +19,8 @@ const screenOptions: NativeStackNavigationOptions = {
     ...TypographyVariant.bodyLargeBold,
     color: Color.SECONDARY,
   },
+  headerBackTitleVisible: false,
+  headerTintColor: Color.SECONDARY,
 };
 
 const Navigator = () => {
@@ -33,6 +35,13 @@ const Navigator = () => {
           component={HomeScreen}
           options={{
             title: 'Repositories',
+          }}
+        />
+        <Stack.Screen
+          name="SelectedRepositories"
+          component={SelectedRepositoriesScreen}
+          options={{
+            title: 'Selected Repositories',
           }}
         />
       </Stack.Navigator>

@@ -1,3 +1,5 @@
+import { Linking } from 'react-native';
+
 import { useAppDispatch, useAppSelector } from './store';
 
 import { getSelectedRepositoriesSelector } from '@/store/selectors';
@@ -8,6 +10,7 @@ import {
   setRepositorySelected,
   setShowSelectionMode,
 } from '@/store/slices/repositorySlice';
+import { Repository } from '@/types';
 
 const useRepository = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +44,10 @@ const useRepository = () => {
     dispatch(deleteSelectedRepositories());
   };
 
+  const openRepository = (repository: Repository) => {
+    Linking.openURL(repository.html_url);
+  };
+
   const getRepositories = (searchString: string, count: number) => {
     dispatch(
       fetchRepositories({
@@ -55,11 +62,13 @@ const useRepository = () => {
     repositories,
     isRepositoriesLoading,
     hasRepositories,
+    selectedRepositories,
     hasSelectedRepositories,
     showSelectionMode,
     switchSelectionMode,
     switchRepositorySelected,
     removeSelectedRepositories,
+    openRepository,
   };
 };
 

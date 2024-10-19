@@ -6,24 +6,24 @@ import { Trash2 } from 'lucide-react-native';
 import styles from './styles';
 
 import { Color, DSCheckBox, DSInput, DSText, Typography } from '@/ds';
-import { useRepository } from '@/hooks';
 
-type RepositoryListHeaderProps = {
+type ListHeaderProps = {
   onChangeText: (text: string) => void;
   onDeletePress: () => void;
+  onPressSelectionMode: () => void;
+  showButtons: boolean;
+  showDeleteButton: boolean;
+  isSelectionMode: boolean;
 };
 
-const RepositoryListHeader = ({
+const ListHeader = ({
   onChangeText,
   onDeletePress,
-}: RepositoryListHeaderProps) => {
-  const {
-    hasRepositories,
-    switchSelectionMode,
-    showSelectionMode,
-    hasSelectedRepositories,
-  } = useRepository();
-
+  onPressSelectionMode,
+  showButtons,
+  showDeleteButton,
+  isSelectionMode,
+}: ListHeaderProps) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.inputContainer}>
@@ -32,15 +32,15 @@ const RepositoryListHeader = ({
           onChangeText={onChangeText}
         />
       </View>
-      {hasRepositories && (
+      {showButtons && (
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.checkContainer}
-            onPress={switchSelectionMode}
+            onPress={onPressSelectionMode}
           >
             <DSCheckBox
               onChange={() => {}}
-              checked={showSelectionMode}
+              checked={isSelectionMode}
               isDisabled
             />
             <DSText
@@ -52,7 +52,7 @@ const RepositoryListHeader = ({
             </DSText>
           </TouchableOpacity>
 
-          {hasSelectedRepositories && (
+          {showDeleteButton && (
             <TouchableOpacity onPress={onDeletePress}>
               <Trash2
                 strokeWidth={2}
@@ -66,4 +66,4 @@ const RepositoryListHeader = ({
   );
 };
 
-export default RepositoryListHeader;
+export default ListHeader;
