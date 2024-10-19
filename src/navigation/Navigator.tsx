@@ -9,12 +9,16 @@ import {
 import { RootStackParamsList } from './Params';
 import { navigationRef } from './RootNavigation';
 
+import { Color, TypographyVariant } from '@/ds';
 import { HomeScreen } from '@/screens';
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const screenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
+  headerTitleStyle: {
+    ...TypographyVariant.bodyLargeBold,
+    color: Color.SECONDARY,
+  },
 };
 
 const Navigator = () => {
@@ -27,6 +31,9 @@ const Navigator = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
+          options={{
+            title: 'Repositories',
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

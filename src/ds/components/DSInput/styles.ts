@@ -7,14 +7,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    borderWidth: 1.5,
+    borderColor: Color.SECONDARY,
     borderRadius: BorderRadius.INFINITE,
-    backgroundColor: Color.PRIMARY,
     height: 54,
   },
   input: {
     flex: 1,
     paddingHorizontal: 16,
-    color: Color.WHITE,
+    color: Color.SECONDARY,
   },
   icon: {
     marginRight: Spacing.MD,
