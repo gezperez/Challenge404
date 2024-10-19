@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { View } from 'react-native';
 
+import { DSText } from '@/ds';
 import { useRepository } from '@/hooks';
 
 const HomeScreen = () => {
@@ -9,10 +10,14 @@ const HomeScreen = () => {
   console.log('aca', repositories.length);
 
   useEffect(() => {
-    getRepositories('react', 1);
+    getRepositories('Challenge404', 20);
   }, []);
 
-  return <View />;
+  return (
+    <View>
+      <DSText>Title</DSText>
+    </View>
+  );
 };
 
 export default HomeScreen;
