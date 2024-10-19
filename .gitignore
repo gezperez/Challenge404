@@ -2,6 +2,10 @@
 #
 .DS_Store
 
+__test__
+
+.jest/
+
 # Xcode
 #
 build/
@@ -72,3 +76,5 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.env
