@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ListHeader, RepositoryList, StarCount } from '@/components';
 import { DSContainer, DSLoader } from '@/ds';
@@ -7,6 +7,8 @@ import { useAppNavigation, useDebounce, useRepository } from '@/hooks';
 import { Repository } from '@/types';
 
 const HomeScreen = () => {
+  const [inputError, setInputError] = useState<string | undefined>();
+
   const {
     getRepositories,
     repositories,
@@ -36,6 +38,13 @@ const HomeScreen = () => {
   };
 
   const handleSearchChange = (searchString: string) => {
+    const trimmedString = searchString.trim();
+
+    if (trimmedString.length < 3) {
+      return setInputError('You have to enter at least 3 characters');
+    }
+
+    setInputError(undefined);
     removeRepositories();
     getRepositories(searchString, 20);
   };
@@ -78,7 +87,7 @@ const HomeScreen = () => {
       } as BottomBarProps;
     }
 
-    if (totalStarsCount > 0) {
+    if (hasRepositories) {
       props = {
         ...props,
         renderContent: () => <StarCount amount={totalStarsCount} />,
@@ -97,6 +106,7 @@ const HomeScreen = () => {
         isSelectionMode={showSelectionMode}
         onPressSelectionMode={switchSelectionMode}
         showDeleteButton={hasSelectedRepositories}
+        inputError={inputError}
       />
       {renderContent()}
     </DSContainer>

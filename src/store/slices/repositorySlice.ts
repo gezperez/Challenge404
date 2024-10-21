@@ -5,7 +5,7 @@ import { createAppSlice } from '../utils';
 import RepositoryApi from '@/api/repository';
 import { FetchRepositoriesResponse, Repository } from '@/types';
 
-interface RepositoryState {
+export interface RepositoryState {
   repositoriesLoading: boolean;
   repositoriesError: boolean;
   repositories: Repository[];

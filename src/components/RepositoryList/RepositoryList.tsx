@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 
 import RepositoryCard from '../RepositoryCard';
+import { EmptyState } from './components';
 
 import { Repository } from '@/types';
 
@@ -34,6 +35,7 @@ const RepositoryList = ({
       data={data}
       keyExtractor={getKey}
       renderItem={renderItem}
+      ListEmptyComponent={EmptyState}
     />
   );
 };

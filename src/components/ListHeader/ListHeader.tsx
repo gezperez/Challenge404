@@ -1,11 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
-import { Trash2 } from 'lucide-react-native';
+import { SquareMousePointer, SquarePen, Trash2 } from 'lucide-react-native';
 
 import styles from './styles';
 
-import { Color, DSCheckBox, DSInput, DSText, Typography } from '@/ds';
+import { Color, DSInput, DSText, Typography } from '@/ds';
 
 type ListHeaderProps = {
   onChangeText: (text: string) => void;
@@ -14,6 +14,7 @@ type ListHeaderProps = {
   showButtons: boolean;
   showDeleteButton: boolean;
   isSelectionMode: boolean;
+  inputError?: string;
 };
 
 const ListHeader = ({
@@ -23,6 +24,7 @@ const ListHeader = ({
   showButtons,
   showDeleteButton,
   isSelectionMode,
+  inputError,
 }: ListHeaderProps) => {
   return (
     <View style={styles.mainContainer}>
@@ -30,6 +32,7 @@ const ListHeader = ({
         <DSInput
           placeholder="Search repositories"
           onChangeText={onChangeText}
+          errorMessage={inputError}
         />
       </View>
       {showButtons && (
@@ -38,11 +41,17 @@ const ListHeader = ({
             style={styles.checkContainer}
             onPress={onPressSelectionMode}
           >
-            <DSCheckBox
-              onChange={() => {}}
-              checked={isSelectionMode}
-              isDisabled
-            />
+            {isSelectionMode ? (
+              <SquarePen
+                strokeWidth={3}
+                color={Color.SECONDARY}
+              />
+            ) : (
+              <SquareMousePointer
+                strokeWidth={3}
+                color={Color.SECONDARY}
+              />
+            )}
             <DSText
               color={Color.SECONDARY}
               style={styles.text}

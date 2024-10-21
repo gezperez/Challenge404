@@ -1,10 +1,18 @@
+import React from 'react';
 import { View } from 'react-native';
 
-import { DSText } from '@/ds';
+import styles from './styles';
+
+import { Color, DSText, Typography } from '@/ds';
 
 const EmptyState = () => (
-  <View>
-    <DSText />
+  <View style={styles.container}>
+    <DSText
+      type={Typography.BODY_DEFAULT_BOLD}
+      color={Color.GRAY}
+    >
+      No repositories were found
+    </DSText>
   </View>
 );
 
