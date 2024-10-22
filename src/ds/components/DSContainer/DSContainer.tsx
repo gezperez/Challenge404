@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { SafeAreaView, StatusBar, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 
 import styles from './styles';
 import DSButton from '../DSButton';
@@ -32,7 +32,6 @@ const DSContainer = ({ children, bottomBarProps }: DSContainerProps) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
       <View style={styles.innerContainer}>{children}</View>
       {renderBottomBar()}
     </View>
