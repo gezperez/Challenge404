@@ -6,7 +6,6 @@ import { Star } from 'lucide-react-native';
 import styles from './styles';
 
 import { Color, DSAvatar, DSCheckBox, DSText, Typography } from '@/ds';
-import { useRepository } from '@/hooks';
 import { Repository } from '@/types';
 
 type RepositoryCardProps = {
@@ -14,6 +13,7 @@ type RepositoryCardProps = {
   onPress: (repository: Repository) => void;
   onCheckPress?: (repository: Repository) => void;
   showCheck?: boolean;
+  showSelectionMode?: boolean;
 };
 
 const RepositoryCard = ({
@@ -21,8 +21,8 @@ const RepositoryCard = ({
   onPress,
   onCheckPress,
   showCheck = true,
+  showSelectionMode,
 }: RepositoryCardProps) => {
-  const { showSelectionMode } = useRepository();
   const { owner, name, checked, stargazers_count } = repository;
 
   const { avatar_url, login } = owner;
@@ -35,6 +35,7 @@ const RepositoryCard = ({
     <TouchableOpacity
       onPress={handleItemPress}
       style={styles.container}
+      accessibilityLabel="card-button"
     >
       {showSelectionMode && showCheck && (
         <DSCheckBox

@@ -11,6 +11,7 @@ type RepositoryListProps = {
   onPress: (repository: Repository) => void;
   onCheckPress?: (repository: Repository) => void;
   showChecks?: boolean;
+  showSelectionMode?: boolean;
 };
 
 const RepositoryList = ({
@@ -18,6 +19,7 @@ const RepositoryList = ({
   onPress,
   onCheckPress,
   showChecks,
+  showSelectionMode,
 }: RepositoryListProps) => {
   const getKey = (item: Repository) => item.id.toString();
 
@@ -27,6 +29,7 @@ const RepositoryList = ({
       onPress={onPress}
       onCheckPress={onCheckPress}
       showCheck={showChecks}
+      showSelectionMode={showSelectionMode}
     />
   );
 

@@ -9,6 +9,7 @@ const DSLoader = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator
+        accessibilityLabel="activity-indicator"
         size={'large'}
         color={Color.SECONDARY}
       />

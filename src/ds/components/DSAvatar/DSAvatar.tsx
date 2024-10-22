@@ -16,13 +16,19 @@ const DSAvatar = ({ source }: AvatarProps) => {
     if (source) {
       return (
         <Image
+          accessibilityLabel="avatar-image"
           style={styles.avatar}
           source={source}
         />
       );
     }
 
-    return <User color={Color.WHITE} />;
+    return (
+      <User
+        color={Color.WHITE}
+        accessibilityLabel="avatar-icon"
+      />
+    );
   };
 
   return <View style={styles.container}>{renderContent()}</View>;

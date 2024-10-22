@@ -33,10 +33,13 @@ const DSCheckbox = ({
             color={Color.WHITE}
             size={16}
             strokeWidth={5}
+            accessibilityLabel="check-icon"
           />
         </View>
       );
     }
+
+    return null;
   };
 
   return (
@@ -46,6 +49,7 @@ const DSCheckbox = ({
       activeOpacity={0.8}
       hitSlop={16}
       disabled={isDisabled}
+      accessibilityLabel="check-button"
     >
       <View style={[styles.container, checked && styles.checkedStyle]}>
         {renderIcon()}

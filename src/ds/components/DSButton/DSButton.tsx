@@ -7,7 +7,7 @@ import styles from './styles';
 import { Color, Typography } from '@/ds/constants';
 import { ButtonProps } from '@/ds/types';
 
-const ButtonText = ({
+const DSButton = ({
   onPress,
   title,
   style,
@@ -18,6 +18,7 @@ const ButtonText = ({
     if (isLoading) {
       return (
         <ActivityIndicator
+          accessibilityLabel="button-activity-indicator"
           size={'small'}
           color={Color.WHITE}
         />
@@ -41,10 +42,11 @@ const ButtonText = ({
       onPress={onPress}
       style={[styles.container, style]}
       activeOpacity={0.8}
+      accessibilityLabel="button"
     >
       {renderContent()}
     </TouchableOpacity>
   );
 };
 
-export default ButtonText;
+export default DSButton;

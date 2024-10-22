@@ -65,7 +65,10 @@ const DSInput = (props: InputProps, ref?: ForwardedRef<TextInput>) => {
 
   return (
     <View style={containerStyle}>
-      <TouchableWithoutFeedback onPress={handleOnPress}>
+      <TouchableWithoutFeedback
+        onPress={handleOnPress}
+        accessibilityLabel="input-button"
+      >
         <View
           style={[styles.inputContainer, errorMessage && styles.errorStyle]}
         >

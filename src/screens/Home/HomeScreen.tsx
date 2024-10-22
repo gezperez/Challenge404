@@ -64,13 +64,12 @@ const HomeScreen = () => {
     }
 
     return (
-      <>
-        <RepositoryList
-          data={repositories}
-          onPress={handleRepositoryPress}
-          onCheckPress={handleRepositoryCheckPress}
-        />
-      </>
+      <RepositoryList
+        data={repositories}
+        onPress={handleRepositoryPress}
+        onCheckPress={handleRepositoryCheckPress}
+        showSelectionMode={showSelectionMode}
+      />
     );
   };
 

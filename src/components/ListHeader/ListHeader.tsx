@@ -62,7 +62,10 @@ const ListHeader = ({
           </TouchableOpacity>
 
           {showDeleteButton && (
-            <TouchableOpacity onPress={onDeletePress}>
+            <TouchableOpacity
+              onPress={onDeletePress}
+              accessibilityLabel="delete-button"
+            >
               <Trash2
                 strokeWidth={2}
                 color={Color.DANGER}
